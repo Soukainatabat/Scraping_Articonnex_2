@@ -1,5 +1,5 @@
 
-Scraping1/
+Scraping 2/
 ├── data/
 │   ├── raw/           # Données brutes extraites scraping
 │   ├── processed/     # Données nettoyées/enrichies
@@ -15,3 +15,9 @@ Scraping1/
 ├── requirements.txt   # Liste des dépendances Python
 ├── README.md          # Documentation du projet
 └── main.py            # Script principal pour exécuter le pipeline
+
+
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python main.py

@@ -6,6 +6,7 @@ def clean_html(html):
     if pd.isna(html):
         return ""
     return BeautifulSoup(str(html), "html.parser").get_text(separator=" ", strip=True)
+  
 
 def nettoyer_prix(val):
     try:

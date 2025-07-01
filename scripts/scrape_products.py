@@ -1,6 +1,12 @@
 import requests
 import json
 from bs4 import BeautifulSoup
+import re 
+
+
+def extract_ean_from_handle(handle):
+    match = re.search(r'ean-(\d+)', handle)
+    return match.group(1) if match else "EAN indisponible"  
 
 def run_scrape_products():
     url = "https://articonnex.com/collections"
@@ -41,7 +47,7 @@ def run_scrape_products():
                     "available": "VRAI" if variant.get("available") else "FAUX",
                     "product_url": f"https://articonnex.com/products/{p.get('handle')}.js",
                     "description": p.get("body_html", ""),
-                    "ean": variant.get("barcode"),
+                    "ean": str(variant.get("barcode")).strip() if variant.get("barcode") else extract_ean_from_handle(p.get("handle", "")),
                     "ref_articonnex": variant.get("sku"),
                     "tags": ", ".join(p.get("tags", [])),
                     "stock_quantity": variant.get("inventory_quantity"),
